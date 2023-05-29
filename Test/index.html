@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Excel fetch testing</title>
+  </head>
+  <body>
+    <input type="text" id="input-file" onchange="fetchFile()"  class="form-control">
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script> -->
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+
+        <script>
+            // let allData;
+            function fetchFile() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', './Aluminum Calculator Products Pricing.xlsx', true);
+            xhr.responseType = 'arraybuffer';
+
+            xhr.onload = function(event) {
+                var data = new Uint8Array(xhr.response);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+                var jsonData = XLSX.utils.sheet_to_json(sheet);
+                // allData = jsonData;
+                findSpecificPrice(jsonData);
+                console.log(jsonData);
+            };
+
+            xhr.send();
+            }
+            function findSpecificPrice(data){
+
+                // let input="Aluminium Slat – "Variation" (6.5m)";
+                let variation="Heavy Duty Hinges";
+                let SlatesSize="65mm";
+                // let input="Aluminium Slat – Custom Colour (6.5m)";
+
+                data.forEach(data => {
+                    // if(data[0])
+                        // console.log(data[1]);
+                    if(1>= data.No || data.No <=12 ){
+                        if(variation==data.Colour){
+                            // console.log(data.No," Number#");
+                            // console.log(data.Size," Size");
+                            if(SlatesSize == data.Size){
+                                console.log(data.No," Number#");
+                                console.log(data.Name," found");
+                                console.log(data.Colour," Colour");
+                                console.log(data.Size," Size");
+                                console.log(data.Price," Price");
+                            }
+                        }
+                    }
+                    else if(13>= data.No || data.No <=28){
+                    //Currently Not handling   
+                    }
+                    else{
+                        if(variation==data.Name){
+                            console.log(data.No," Number#");
+                            console.log(data.Name," found");
+                            console.log(data.Price," Price")
+                        }
+                    }
+                    // console.log(data.Name);
+                });
+                let Extras=[];
+                let a = 0;
+                data.forEach(data => {
+                 if(1>= data.No || data.No <=28){
+                    //Currently Not handling   
+                    }
+                    else{
+                        Extras[a]={
+                            Name : data.Name,
+                            Price : data.Price,
+                        }
+                        // console.log(data.No," Number#");
+                        console.log(data.Name," found");
+                        console.log(data.Price," Price");
+                        a++;
+                    }
+                    // console.log(data.Name);
+                });
+                console.log("Extras ",Extras);
+                Extra[1].Price
+
+
+            }
+
+
+
+
+
+
+        </script>
+  </body>
+</html>

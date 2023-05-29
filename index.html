@@ -18,37 +18,31 @@
         <div class="row mt-3">
             <div class="col-md-6">
               <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-3 ">
+                  <label for="type">Type:</label>
+                  <select name="variation" id="type" class="form-control">
+                    <option value="gate">Gate</option>
+                    <option value="screen">Screen</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
                   <label for="variation">VARIATION:</label>
-                  <select name="variation" id="variation" class="form-control">
+                  <select name="variation" id="variation" class="form-control" onchange="colorOptions()">
                     <option value="timberLook">Timber Look</option>
                     <option value="powderCoated">Powder Coated</option>
                     <option value="customColor">Custom Colored</option>
                   </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="color">COLOR:</label>
                   <select name="variation" id="color" class="form-control">
-                    <option value="basalt">Basalt</option>
-                    <option value="classicCream">Classic Cream</option>
-                    <option value="cottageGreen">Cottage Green</option>
-                    <option value="cove">Cove</option>
-                    <option value="deepOcean">Deep Ocean</option>
-                    <option value="dune">Dune</option>
-                    <option value="eveningHaze">Evening Haze</option>
-                    <option value="gully">Gully</option>
-                    <option value="ironstone">Ironstone</option>
-                    <option value="jasper">Jasper</option>
-                    <option value="mangrove">Mangrove</option>
-                    <option value="manorRed">Manor Red</option>
-                    <option value="paleEucalypt">Pale Eucalypt</option>
-                    <option value="paperbark">Paperbark</option>
-                    <option value="terrain">Terrain</option>
-                    <option value="wallaby">Wallaby</option>
-                    <option value="windSpray">Wind Spray</option>
+                    <option value='lightOak'>Light Oak</option>
+                    <option value='wildOlive'>Wild Olive</option>
+                    <option value='Jarrah'>Jarrah</option>
+                    <option value='westernRedCedar'>Western Red Cedar</option>
                   </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="size">SLAT SIZE:</label>
                   <select name="variation" id="size" class="form-control">
                     <option value="100">100mm</option>
